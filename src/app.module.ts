@@ -1,14 +1,17 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import {GuardianModule} from './guardian/guardian.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-//import { AdminModule } from './admin/admin.module';
+import { St_GuardianModule } from './st_guardian/st_guardian.module';
+import { AuthModule } from './st_guardian/auth/auth.module';
 
 
 
-@Module({
-  imports: [GuardianModule, TypeOrmModule.forRoot(
+
+@Module(
+  
+  {
+  imports: [St_GuardianModule, TypeOrmModule.forRoot(
     { type: 'postgres',
     host: 'localhost',
     port: 5432,
@@ -17,9 +20,9 @@ import { AppService } from './app.service';
     database: 'nova',//Change to your database name
     autoLoadEntities: true,
     synchronize: true,
-    } ),
+    } ), AuthModule,
     ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
